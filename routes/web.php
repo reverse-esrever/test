@@ -4,5 +4,5 @@ use App\Http\Router;
 use Models\User;
 
 Router::get('/', function(){
-   View('index', []);
+   return View('index',['test' => "Congrats!!!"],'app');
 });

@@ -24,8 +24,8 @@ function getPreparedUpdateTableExpression(string $rows,string $placeholders){
     return $expression;
 }
 
-function View(string $route,array $params,string $layout = 'app'){
-    View::make($route, $params, $layout);
+function View(string $route, array $params = [],string $layout = null){
+    return View::make($route, $params, $layout);
 }
 function getViewsPath(){
     return VIEWS_PATH;
