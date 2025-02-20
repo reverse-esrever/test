@@ -6,7 +6,6 @@ require_once '../routes/web.php';
 use App\Kernel\App;
 use Configs\DbConfig;
 
-
 App::configure(
     new DbConfig([
         'host' => $_ENV['DB_HOST'],

@@ -2,6 +2,7 @@
 
 namespace App\Kernel;
 
+use App\Exceptions\ExceptionHandler;
 use App\Http\RequestHandler;
 use Configs\DbConfig;
 use Models\User;
@@ -20,6 +21,11 @@ class App{
         return $app;
     }
     public function run(){
-        (new RequestHandler())->handle($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
+        try{
+            (new RequestHandler())->handle($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
+        }catch(\Throwable $e){
+            $exceptionHandler = new ExceptionHandler();
+            $exceptionHandler->handle($e);
+        }
     }
 }

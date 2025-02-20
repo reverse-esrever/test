@@ -31,4 +31,10 @@ function getViewsPath(){
     return VIEWS_PATH;
 }
 
+function print_pretty(array|string $args){
+    echo "<pre>";
+    var_dump($args);
+    echo "</pre>";
+}
+
 define('VIEWS_PATH', dirname(dirname(__DIR__)) . '\\views\\');

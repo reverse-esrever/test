@@ -8,12 +8,7 @@ class View
 {
     public static function make(string $route, array $params = [], string $layout = null)
     {
-        if (isset($layout)) {
-            if (file_exists(getViewsPath() . "layouts/$layout.php")) {
-            } else {
-                throw new FileNotFoundException();
-            }
-        }
+        $route = str_replace('.', '/', $route);
         $file = getViewsPath() . $route . '.php';
         if (file_exists($file)) {
             foreach ($params as $key => $param) {
@@ -25,12 +20,12 @@ class View
                     $section = $file;
                     return include_once $layoutFile;
                 } else {
-                    throw new FileNotFoundException();
+                    throw new FileNotFoundException($file);
                 }
             }
             return include_once $file;
         }
 
-        throw new FileNotFoundException();
+        throw new FileNotFoundException($file);
     }
 }

@@ -54,7 +54,7 @@ class DB
                 $obj = new self;
                 return $obj->$method(...$arguments);
             } catch (\PDOException $e) {
-                echo 'errorrr';
+                echo $e->getMessage() . "on Line: " . $e->getLine() . " in File" . $e->getFile();
                 die;
             }
         }
