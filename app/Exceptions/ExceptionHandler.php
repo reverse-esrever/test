@@ -23,7 +23,8 @@ class ExceptionHandler
                 View('404', [], 'app');
                 break;            
             default:
-                # code...
+                echo $e->getMessage();
+                echo "In file :" . $e->getFile() . " " . $e->getLine();
                 break;
         }
     }

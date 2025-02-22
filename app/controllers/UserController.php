@@ -8,7 +8,7 @@ use Models\User;
 class UserController
 {
     public function index(){
-        return View('users.inde', [], 'app');
+        return View('users.index', [], 'app');
     }
     public function create(){
         return View('users.create', [], 'app');

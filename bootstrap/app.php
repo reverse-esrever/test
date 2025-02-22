@@ -5,6 +5,7 @@ require_once '../routes/web.php';
 
 use App\Kernel\App;
 use Configs\DbConfig;
+use Configs\SessionConfig;
 
 App::configure(
     new DbConfig([
@@ -13,5 +14,9 @@ App::configure(
         'user' => $_ENV['DB_USER'],
         'pass' => $_ENV['DB_PASS'],
         'driver' => $_ENV['DB_DRIVER'] ?? 'mysql',
-    ])
+    ]),
+    new SessionConfig([
+        'cookie_lifetime' => $_ENV['SESSION_COCKIE_LIFE_TIME'] ?? 86400, // 24 часа
+        'gc_maxlifetime' => $_ENV['SESSION_MAX_LIFE_TIME'] ?? 86400,
+    ]),
 )->run();

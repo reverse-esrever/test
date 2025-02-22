@@ -7,6 +7,7 @@
 </head>
 <body>
     <h1>App $layout</h1>
+    
     <?php include_once $section ?? ''?>
 </body>
 </html>

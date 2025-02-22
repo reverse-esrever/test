@@ -33,6 +33,12 @@ abstract class Model
 
         return $res;
     }
+    protected function find($params)
+    {
+        $res = DB::find(static::$table, $params);
+
+        return $res;
+    }
     protected function insert(array $record)
     {
         DB::insert(static::$table, $record);

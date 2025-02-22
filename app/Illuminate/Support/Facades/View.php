@@ -20,7 +20,7 @@ class View
                     $section = $file;
                     return include_once $layoutFile;
                 } else {
-                    throw new FileNotFoundException($file);
+                    throw new FileNotFoundException($layoutFile);
                 }
             }
             return include_once $file;

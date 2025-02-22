@@ -19,6 +19,33 @@ class DB
         $response = $sth->fetch(\PDO::FETCH_ASSOC);
         return $response ? $response : null;
     }
+    protected static function find($table, $params = [])
+    {
+        $dbh = KernelDB::getInstance();
+        $query = "SELECT * FROM $table ";
+        if (!empty($params)) {
+            $query .= " WHERE ";
+            $expression = [];
+            $rows = array_keys($params);
+            foreach ($rows as $name) {
+                $expression[] = " `$name` = :$name";
+            }
+            $expression = implode(' AND ', $expression);
+            $query .= $expression . ";";
+            $sth = $dbh->prepare($query);
+            foreach ($params as $key => $param) {
+                $sth->bindValue($key, $param);
+            }
+            $sth->execute();
+            $response = $sth->fetch(\PDO::FETCH_ASSOC);
+            
+            return $response;
+        }
+        $sth = $dbh->prepare($query);
+        $sth->execute();
+        $response = $sth->fetch(\PDO::FETCH_ASSOC);
+        return $response;
+    }
     protected static function insert(string $table, array $record)
     {
         [$rows, $placeholders] = prepareTableRowsAndPlacholders($record);

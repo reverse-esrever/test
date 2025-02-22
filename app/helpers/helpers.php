@@ -12,6 +12,25 @@ function prepareTableRowsAndPlacholders(array $record) : array{
 
     return [$rows, $placeholders];
 }
+function prepareRowsAndPlacholders(array $params){
+    $rows = array_keys($params);
+    $placeholders = array_values(array_map(function($item){
+        return $item = ":" . $item;
+    },$rows));
+    return [$rows, $placeholders];
+}
+function prepareQueryWithWhere(array $params) : array{
+    var_dump($params);
+    die;
+    $placeholders = array_keys($record);
+    $rows = implode(",", $placeholders);
+    foreach($placeholders as &$key){
+        $key = ":" . $key;
+    }
+    $placeholders = implode(",", $placeholders);
+
+    return [$rows, $placeholders];
+}
 
 function getPreparedUpdateTableExpression(string $rows,string $placeholders){
     $expression = [];
