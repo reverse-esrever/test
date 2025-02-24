@@ -25,7 +25,6 @@ class App{
         return $app;
     }
     public function run(){
-        $this->session->start();
         try{
             (new RequestHandler())->handle($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
         }catch(\Throwable $e){

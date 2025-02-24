@@ -56,4 +56,11 @@ function print_pretty(array|string $args){
     echo "</pre>";
 }
 
+function user(){
+   return isset($_SESSION['user_id']);
+}
+function guest(){
+   return !isset($_SESSION['user_id']);
+}
+
 define('VIEWS_PATH', dirname(dirname(__DIR__)) . '\\views\\');

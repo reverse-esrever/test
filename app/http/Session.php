@@ -19,8 +19,8 @@ class Session
     }
     
     public function start(){
-        session_start();
         $this->sessionId = session_id();
+        session_start();
         $this->lastActivity = time();
     }
     private function loadSessionData() {

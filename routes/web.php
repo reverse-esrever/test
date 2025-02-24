@@ -19,3 +19,6 @@ Router::delete('/users/{user}', [UserController::class, 'destroy']);
 
 Router::get('/login', [AuthController::class, 'login']);
 Router::post('/login', [AuthController::class, 'store']);
+Router::get('/register', [AuthController::class, 'register']);
+Router::post('/register', [AuthController::class, 'create']);
+Router::post('/logout', [AuthController::class, 'logout']);
