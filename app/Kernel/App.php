@@ -26,6 +26,7 @@ class App{
     }
     public function run(){
         try{
+            $this->session->start();
             (new RequestHandler())->handle($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
         }catch(\Throwable $e){
             $exceptionHandler = new ExceptionHandler();

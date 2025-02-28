@@ -6,6 +6,7 @@ use App\Exceptions\NotAllowedMethodException;
 use App\Exceptions\RouteNotFoundException;
 use FastRoute\Dispatcher;
 use App\Test;
+use Throwable;
 
 class RequestHandler
 {
@@ -24,7 +25,7 @@ class RequestHandler
             case Dispatcher::METHOD_NOT_ALLOWED:
                 $method = $_POST['_method'];
                 $allowedMethods = $routeInfo[1];
-                if(in_array($method, $allowedMethods)){
+                if (in_array($method, $allowedMethods)) {
                     return $this->handle($method, $uri);
                 }
                 throw new NotAllowedMethodException();

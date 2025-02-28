@@ -19,7 +19,7 @@ class Session
     }
     
     public function start(){
-        $this->sessionId = session_id();
+        $this->sessionId = $this->sessionId ?? session_id();
         session_start();
         $this->lastActivity = time();
     }

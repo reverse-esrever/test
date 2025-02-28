@@ -30,4 +30,7 @@ class Db{
     public static function getInstance(){
         return static::$pdo ?? null;
     }
+    public static function getErrorInfo(){
+        return static::$pdo->errorInfo() ?? null;
+    }
 }

@@ -2,10 +2,11 @@
 
 namespace App\Illuminate\Support\Facades;
 
+use App\Exceptions\ExceptionHandler;
 use App\Kernel\Db as KernelDB;
 use Doctrine\Inflector\InflectorFactory;
 use Models\Model;
-use Throwable;
+use PDOException;
 
 class DB
 {
@@ -48,13 +49,23 @@ class DB
     }
     protected static function insert(string $table, array $record)
     {
-        [$rows, $placeholders] = prepareTableRowsAndPlacholders($record);
-        $dbh = KernelDB::getInstance();
-        $sth = $dbh->prepare("INSERT INTO $table($rows) VALUES($placeholders)");
-        foreach ($record as $key => $value) {
-            $sth->bindValue($key, $value);
+        try {
+            //code...
+            [$rows, $placeholders] = prepareTableRowsAndPlacholders($record);
+            $dbh = KernelDB::getInstance();
+            $sth = $dbh->prepare("INSERT INTO $table($rows) VALUES($placeholders)");
+            foreach ($record as $key => $value) {
+                $sth->bindValue($key, $value);
+            }
+            $sth = $sth->execute();
+    
+            return $dbh->lastInsertId();
+        } catch (\PDOException $th) {     
+            $errorInfo = $sth->errorInfo();    
+            $exceptionHandler = new ExceptionHandler();
+            $exceptionHandler->handle($th, $errorInfo);
+            die;
         }
-        $sth->execute();
     }
     protected static function update(string $table, int $id, array $record)
     {

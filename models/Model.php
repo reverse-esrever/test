@@ -41,7 +41,7 @@ abstract class Model
     }
     protected function insert(array $record)
     {
-        DB::insert(static::$table, $record);
+        return DB::insert(static::$table, $record);
     }
     protected function update(int $id, array $record)
     {

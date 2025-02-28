@@ -63,4 +63,9 @@ function guest(){
    return !isset($_SESSION['user_id']);
 }
 
+function redirect(string $uri){
+    header("Location: $uri");
+    die;
+}
+
 define('VIEWS_PATH', dirname(dirname(__DIR__)) . '\\views\\');
